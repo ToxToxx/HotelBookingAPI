@@ -18,7 +18,7 @@ namespace HotelBookingAPI.Controllers
 
         //create / edit
         [HttpPost]
-        public JsonResult CreatedEdit(HotelBooking hotelBooking)
+        public JsonResult CreateAndEdit(HotelBooking hotelBooking)
         {
             if(hotelBooking.Id == 0)
             {
@@ -34,6 +34,18 @@ namespace HotelBookingAPI.Controllers
             }
             _context.SaveChanges();
             return new JsonResult(Ok(hotelBooking));
+        }
+
+        //Get
+        [HttpGet]
+        public JsonResult GetBooking(int id)
+        {
+            var resultBooking = _context.Bookings.Find(id);
+
+            if(resultBooking == null)
+                return new JsonResult(NotFound());
+
+            return new JsonResult(Ok(resultBooking));
         }
     }
 }
