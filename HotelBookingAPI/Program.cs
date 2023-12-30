@@ -1,6 +1,12 @@
+using Microsoft.EntityFrameworkCore;
+using HotelBookingAPI.Data;
+
+
 var builder = WebApplication.CreateBuilder(args);
 
 // Add services to the container.
+builder.Services.AddDbContext<APIContext>
+    (opt => opt.UseInMemoryDatabase("BookingDB"));
 
 builder.Services.AddControllers();
 // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
