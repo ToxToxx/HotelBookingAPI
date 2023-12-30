@@ -47,5 +47,20 @@ namespace HotelBookingAPI.Controllers
 
             return new JsonResult(Ok(resultBooking));
         }
+
+        //Delete
+        [HttpDelete]
+        public JsonResult DeleteBooking(int id)
+        {
+            var resultBooking = _context.Bookings.Find(id);
+
+            if (resultBooking == null)
+                return new JsonResult(NotFound());
+
+            _context.Bookings.Remove(resultBooking);
+            _context.SaveChanges();
+
+            return new JsonResult(NoContent());
+        }
     }
 }
